@@ -46,7 +46,7 @@ public class DOScaleTextBlah : MonoBehaviour {
 				Transform t = this.transform.GetChild (0).GetChild (j);
 				initPos.Add (t.localPosition);
 				t.localPosition = new Vector3 (t.localPosition.x, t.localPosition.y + 10.15f, t.localPosition.z);
-				t.localScale = Vector3.zero;
+				t.localScale = new Vector3 (1,1,1);
 			}
 		}
 	}
@@ -60,8 +60,9 @@ public class DOScaleTextBlah : MonoBehaviour {
 		for (int i = 0; i < this.transform.childCount; i++) {
 			for (int j = 0; j < this.transform.GetChild(0).childCount; j++) {
 				Transform t = this.transform.GetChild (0).GetChild (j);
-				t.DOScale (scaleTo, scaleUpSpeed).SetEase (ease).SetDelay (count);
+				t.DOLocalRotate (new Vector3(0,0,40), 3.3f).SetEase (ease).SetDelay (count);
 				t.DOLocalMove (initPos[p], scaleUpSpeed).SetEase (ease).SetDelay (count);
+			
 			
 				p+=1;
 				count+=gapBetweenLetters;
