@@ -3,6 +3,9 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
+		_ColorA("ColorA",color) = (1,1,1,1)
+		_ColorB("ColorA",color) = (1,1,1,1)
+		_ColorC("ColorA",color) = (1,1,1,1)
 	}
 	SubShader
 	{
@@ -36,7 +39,10 @@
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
-			
+			float4 _ColorA;
+			float4 _ColorB;
+			float4 _ColorC;
+
 			v2f vert (appdata v)
 			{
 				v2f o;
@@ -47,40 +53,6 @@
 			}
 
 
-float normY(float pixel) {
-    return pixel / 100;
-}
-
-float4 mainImage(in float2 fragCoord )
-{
-	float2 xy = fragCoord.xy / float2(100,1);
-	
-    float4 color = float4(1.0, 1.0, 1.0, 1.0);
-    float buffer = normY(5.0);
-    const int amt = 5;
-    float amtf = float(amt);
-    
-    float sinVal;
-    bool colored = false;
-    
-    for(int i = 0; i < amt; i++) {
-        sinVal = sin(xy.x * 12.0 * PI - _Time.x) / amtf + float(i) / amtf;
-
-        if(xy.y < sinVal + buffer && xy.y > sinVal - buffer) {
-            color.r = xy.y;
-            color.g = xy.x;
-            colored = true;
-            break;
-        }
-    }
-    
-    if (!colored && xy.y < sinVal) {
-            color.r = xy.x;
-            color.g = xy.y;
-    }
-    
-    return color;
-}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
@@ -88,7 +60,11 @@ float4 mainImage(in float2 fragCoord )
 				fixed4 col = tex2D(_MainTex, i.uv);
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col);
-				return mainImage(i.uv);
+				float4 AA = _ColorA*i.uv.x;
+				float4 BB = _ColorB*i.uv.y;
+				float4 CC = _ColorC*(1-i.uv.x);
+				return AA+BB+CC;
+
 			}
 			ENDCG
 		}

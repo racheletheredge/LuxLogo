@@ -12,21 +12,30 @@ public class DOScaleTextSecond : MonoBehaviour {
 	public float gapBetweenWords = .5f;
 	public float gapBetweenLetters = .1f;
 	public float scaleUpSpeed = 1;
+	public float scaleDownSpeed = 1;
 	float count;
-	public float noiseSpeed = .4f;
-	public float noiseAmount = .025f;
 	int counter;
-	public Ease ease;
+	public Ease easeIn;
+	public Ease easeOut;
 
 	public bool reset = true;
 
-	public float startTime = 5;
 	float timeCounter = 0;
 
 
-	public Vector3 scaleTo;
-
 	public float goAwayDelay = 1;
+
+	public Vector3 startPos;
+	public Vector3 endPos;
+
+	public Vector3 startScale;
+	public Vector3 scaleUp = Vector3.one;
+	public Vector3 endScale;
+
+	public Vector3 startRotation;
+	public Vector3 endRotation;
+
+
 
 	void Start () {
 		Init ();
@@ -57,9 +66,9 @@ public class DOScaleTextSecond : MonoBehaviour {
 		for (int i = 0; i < this.transform.childCount; i++) {
 			for (int j = 0; j < this.transform.GetChild(0).childCount; j++) {
 				Transform t = this.transform.GetChild (0).GetChild (j);
-				t.localEulerAngles = new Vector3 (0, 0, 45);
-				t.localPosition = new Vector3 (t.localPosition.x, t.localPosition.y + -5f, t.localPosition.z);
-				t.localScale = new Vector3 (1,1,1);
+				t.localEulerAngles = startRotation;
+				t.localPosition += startPos;
+				t.localScale = startScale;
 			}
 		}
 
@@ -73,10 +82,17 @@ public class DOScaleTextSecond : MonoBehaviour {
 
 		for (int i = 0; i < this.transform.childCount; i++) {
 			for (int j = 0; j < this.transform.GetChild(0).childCount; j++) {
+				
 				Transform t = this.transform.GetChild (0).GetChild (j);
-				t.DOLocalRotate (new Vector3(0,0,180+45), scaleUpSpeed*.5f).SetEase (Ease.InOutFlash).SetDelay (count);
-				t.DOLocalMove (initPos[p], scaleUpSpeed).SetEase (ease).SetDelay (count);
-				t.DOScale (Vector3.zero, scaleUpSpeed * .5f).SetDelay (count + goAwayDelay);
+
+				t.DOLocalRotate (new Vector3(0,0,45), scaleUpSpeed).SetEase (easeIn).SetDelay (count);
+				t.DOLocalRotate ( endRotation, scaleDownSpeed).SetEase (easeOut).SetDelay (count+goAwayDelay);
+
+				t.DOLocalMove (initPos[p], scaleUpSpeed).SetEase (easeIn).SetDelay (count);
+				t.DOLocalMove (initPos[p]+endPos, scaleDownSpeed).SetEase (easeOut).SetDelay (count+goAwayDelay);
+
+				t.DOScale (scaleUp, scaleUpSpeed ).SetEase(easeIn).SetDelay (count);
+				t.DOScale (endScale, scaleDownSpeed ).SetEase(easeOut).SetDelay (count + goAwayDelay);
 			
 				p+=1;
 				count+=gapBetweenLetters;

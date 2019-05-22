@@ -11,29 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0205cb8957891b44b142689caa23987, type: 3}
   m_Name: RecorderWindowSettings
   m_EditorClassIdentifier: 
-  m_Settings: {fileID: 0}
---- !u!114 &114470307808225996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d935bf7a4fcf66488738bda5536c1cb, type: 3}
-  m_Name: 966691d5-4ed8-4279-87ad-c38eb7142120
-  m_EditorClassIdentifier: 
-  m_DisplayName: Pixels
-  m_Id: 2d096293-1703-4a03-9491-bc76be0265b5
-  m_OutputSize: 0
-  m_AspectRatio: 0
-  m_ForceEvenSize: 0
-  source: 1
-  m_CameraTag: 
-  m_FlipFinalOutput: 0
-  m_AllowTransparency: 0
-  m_CaptureUI: 0
---- !u!114 &114570676336396900
+  m_Settings: {fileID: 114556097256886434}
+--- !u!114 &114556097256886434
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -62,8 +41,29 @@ MonoBehaviour:
     m_leaf: Recordings
   m_InputsSettings:
     m_InputsSettingsAssets:
-    - {fileID: 114470307808225996}
+    - {fileID: 114983952953916958}
     ownerRecorderSettingsAssetId: 4cd123f39cf4249f68b50edea7e8feca
   m_RecorderTypeName: UnityEngine.Recorder.ImageRecorder, Assembly-CSharp, Version=0.0.0.0,
     Culture=neutral, PublicKeyToken=null
   m_OutputFormat: 0
+--- !u!114 &114983952953916958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d935bf7a4fcf66488738bda5536c1cb, type: 3}
+  m_Name: 8a843283-8e4b-45cc-8303-26b095925e62
+  m_EditorClassIdentifier: 
+  m_DisplayName: Pixels
+  m_Id: 081d7ec8-18c3-4dcf-9bd5-aeb767f3f9c0
+  m_OutputSize: 0
+  m_AspectRatio: 0
+  m_ForceEvenSize: 0
+  source: 1
+  m_CameraTag: 
+  m_FlipFinalOutput: 0
+  m_AllowTransparency: 1
+  m_CaptureUI: 0
