@@ -8,6 +8,7 @@ public class cmdline : MonoBehaviour {
 	public string command;
 	public bool start = false;
 
+	//convert -delay 4/100 -dispose Background -loop -1 *.png anim.gif
 	void Start () {
 		
 	}
